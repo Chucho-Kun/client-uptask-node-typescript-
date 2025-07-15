@@ -1,10 +1,10 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getTaskById } from '@/api/TaskAPI';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getTaskById, updateStatus } from '@/api/TaskAPI';
 import { toast } from 'react-toastify';
-import type { Task } from '../types';
+import type { TaskStatus } from '../types';
 import { formatDate } from '@/utils/utils';
 import { statusTranslations } from '@/locales/es';
 
@@ -22,13 +22,33 @@ export default function TaskModalDetails() {
 
     const show = taskId ? true : false
 
-    const { data , isError , error } = useQuery<Task>({
+    const { data , isError , error } = useQuery({
         queryKey: ['task' , taskId],
         queryFn: () => getTaskById({projectId , taskId}),
         enabled: !!taskId,
         
     })
-    console.log({isError});
+
+    const queryClient = useQueryClient()
+
+    const { mutate } = useMutation({
+        mutationFn: updateStatus,
+        onError: (error) => {
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({queryKey: ['project' , projectId]})
+            queryClient.invalidateQueries({queryKey: ['task' , taskId]})
+            toast.success(data)
+        }
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const status = e.target.value as TaskStatus
+        const data = { projectId , taskId , status }
+        mutate(data)
+    }
+
     if(isError){
         toast.error(error.message , { toastId: 'error' })
         return <Navigate to={`/projects/${projectId}`} />
@@ -73,6 +93,7 @@ export default function TaskModalDetails() {
                                     <div className='my-5 space-y-3'>
                                         <label className='font-bold'>Estado Actual: 
                                             <select 
+                                                onChange={handleChange}
                                                 className='w-full p-3 bg-white border border-gray-300'
                                                 defaultValue={data.status}
                                             >{Object.entries(statusTranslations).map(([key , value]) => (

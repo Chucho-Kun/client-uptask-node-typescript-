@@ -33,7 +33,7 @@ export default function ProjectDetailsView() {
                     type="button"
                     onClick={() => navigate('?newTask=true') }
                     className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors">
-                        Agreagrar tarea
+                        Agregar Tarea
                 </button>
             </nav>
             <TaskList

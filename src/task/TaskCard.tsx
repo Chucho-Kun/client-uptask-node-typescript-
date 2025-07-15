@@ -55,7 +55,7 @@ export default function TaskCard({task}:TaskCardProps) {
                                 onClick={() => navigate(location.pathname + `?viewTask=${task._id}`)}
                                 type='button' 
                                 className='block px-3 py-1 text-sm leading-6 text-gray-900'>
-                                Ver Tarea
+                                Status Tarea
                             </button>
                         </Menu.Item>
                         <Menu.Item>
