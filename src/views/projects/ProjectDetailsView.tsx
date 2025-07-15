@@ -4,6 +4,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom"
 import AddTaskModal from "@/task/AddTaskModal"
 import TaskList from "@/task/TaskList"
 import EditTaskData from "@/task/EditTaskData"
+import TaskModalDetails from "@/task/TaskModalDetail"
 
 
 
@@ -15,7 +16,7 @@ export default function ProjectDetailsView() {
     const projectId = params.projectId!
 
     const { data , isLoading , isError } = useQuery({
-        queryKey: [ 'editProject' , projectId ],
+        queryKey: [ 'project' , projectId ],
         queryFn: () => getProjectsById(projectId),
         retry: false
     })
@@ -40,6 +41,7 @@ export default function ProjectDetailsView() {
             />
            <AddTaskModal />
            <EditTaskData />
+           <TaskModalDetails />
         </>
     )
 
