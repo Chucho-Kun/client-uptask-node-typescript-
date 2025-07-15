@@ -13,7 +13,8 @@
       "@/views/*" : [ "views/*" ],
       "@/api/*" : [ "api/*" ],
       "@/types/*" : [ "types/*" ],
-      "@/lib/*" : [ "lib/*" ]
+      "@/lib/*" : [ "lib/*" ],
+      "@/task/*": ["task/*"]
     },
 
     /* Bundler mode */
