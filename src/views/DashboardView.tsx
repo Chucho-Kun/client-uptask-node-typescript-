@@ -13,7 +13,7 @@ export default function DashboardView() {
         queryKey:['projects'],
         queryFn: getProjects
     })
-
+    
     const queryClient = useQueryClient()
     const { mutate } = useMutation({
         mutationFn: deleteProject,
@@ -59,7 +59,10 @@ if(data) return (
                                 Cliente: {project.clientName}
                             </p>
                             <p className="text-sm text-gray-400">
-                                {project.description}
+                                Descripcion: {project.description}
+                            </p>
+                            <p className="text-sm text-gray-400">
+                                Tareas: {project.tasks.length}
                             </p>
                         </div>
                     </div>

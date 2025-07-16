@@ -22,7 +22,8 @@ export const projectSchema = z.object({
     _id: z.string(),
     projectName: z.string(),
     clientName: z.string(),
-    description: z.string()
+    description: z.string(),
+    tasks: z.array( z.object() )
 })
 
 export const dashboardProjectSchema = z.array(
@@ -30,9 +31,10 @@ export const dashboardProjectSchema = z.array(
         _id: true,
         projectName: true,
         clientName: true,
-        description: true
+        description: true,
+        tasks: true
    })
 )
 
 export type Project = z.infer<typeof projectSchema>
-export type ProjectFormData = Pick<Project , 'clientName' | 'projectName' | 'description' >
+export type ProjectFormData = Pick<Project , 'clientName' | 'projectName' | 'description' | 'tasks' >
