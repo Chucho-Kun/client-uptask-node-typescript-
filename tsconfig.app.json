@@ -16,7 +16,8 @@
       "@/lib/*" : [ "lib/*" ],
       "@/task/*": ["task/*"],
       "@/utils/*": ["utils/*"],
-      "@/locales/*": ["locales/*"]
+      "@/locales/*": ["locales/*"],
+      "@/assets/*": ["assets/*"]
     },
 
     /* Bundler mode */
