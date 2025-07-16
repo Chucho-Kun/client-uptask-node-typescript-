@@ -9,7 +9,7 @@ api.interceptors.request.use(config => {
   const fullUrl = config.baseURL
     ? config.baseURL.replace(/\/$/, '') + (config.url?.startsWith('/') ? config.url : '/' + config.url)
     : config.url;
-  console.log('Petición Axios URL:', fullUrl);
+  console.log('URL:', fullUrl);
   return config;
 });
 
