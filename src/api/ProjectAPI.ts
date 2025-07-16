@@ -19,8 +19,10 @@ export async function createProject( formData : ProjectFormData ) {
 
 export async function getProjects() {
     try {
-        const { data } = await api('/projects')        
+        const { data } = await api('/projects')  
+        console.log('axios', data);      
         const response = dashboardProjectSchema.safeParse(data)
+        console.log('zustand', response);
         console.log({response});
         
         if(response.success) return response.data        
