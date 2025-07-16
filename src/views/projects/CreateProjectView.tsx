@@ -13,7 +13,8 @@ export default function CreateProjectView() {
     const initialValues : ProjectFormData = {
         projectName: "",
         clientName: "",
-        description: ""
+        description: "",
+        tasks:[]
     }
     const { register , handleSubmit , formState: { errors} } = useForm({ defaultValues: initialValues })
 
