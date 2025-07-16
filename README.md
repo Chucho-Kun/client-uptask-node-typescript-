@@ -132,3 +132,7 @@ export const dashboardProjectSchema = z.array(
 export type Project = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<Project , 'clientName' | 'projectName' | 'description' | 'tasks' >
 ```
+#### src/env.local
+```
+VITE_API_URL=https://server-uptask-node-typescript.onrender.com/api
+```
