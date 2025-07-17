@@ -12,9 +12,7 @@ export default function DashboardView() {
     const { data , isLoading } = useQuery({
         queryKey:['projects'],
         queryFn: getProjects
-    })
-    console.log("**",data , isLoading);
-    
+    })   
     
     const queryClient = useQueryClient()
     const { mutate } = useMutation({

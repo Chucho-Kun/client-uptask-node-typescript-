@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 });
 
-// Interceptor para mostrar la URL completa de cada request
+/** Interceptor para mostrar la URL completa de cada request
 api.interceptors.request.use(config => {
   const fullUrl = config.baseURL
     ? config.baseURL.replace(/\/$/, '') + (config.url?.startsWith('/') ? config.url : '/' + config.url)
@@ -12,5 +12,6 @@ api.interceptors.request.use(config => {
   console.log('URL:', fullUrl);
   return config;
 });
+ */
 
 export default api

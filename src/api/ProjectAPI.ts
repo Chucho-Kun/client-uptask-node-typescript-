@@ -20,20 +20,14 @@ export async function createProject( formData : ProjectFormData ) {
 export async function getProjects() {
     try {
         const { data } = await api('/projects')  
-        console.log('axios', data);      
         const response = dashboardProjectSchema.safeParse(data)
-        console.log('zustand', response);
-        console.log({response});
         if(response.success) return response.data
         
-         console.error('Validación fallida:', response.error, data);
         return []; // O retorna un array vacío para evitar undefined
     } catch (error) {
         if( isAxiosError(error) && error.response){
             throw new Error( error.response.data.error )
         }
-
-        console.error('Error en getProjects:', error);
         return [];
     }
 }
