@@ -1,5 +1,8 @@
 # FRONT MERN - REST API REACT/TypeScript
 React Web Platform connected to an API hosted on a MongoDB + Express + React + Node ( MERN )
+![Gameplay A](src/assets/shotA.png)
+![Gameplay B](src/assets/shotB.png)
+![Gameplay C](src/assets/shotC.png)
 ![Gameplay 1](src/assets/shot1.png)
 ![Gameplay 2](src/assets/shot2.png)
 ## Technologies
