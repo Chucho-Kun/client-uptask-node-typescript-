@@ -77,7 +77,7 @@ export default function RegisterView() {
                     ¿Ya tienes cuenta? Iniciar Sesión
                 </Link>
                 <Link
-                    to='/auth/forgot-password'
+                    to='/auth/forgotten-password'
                     className="text-center text-gray-300 font-normal"
                 >
                     ¿Olvidaste tu contraseña? Reestablecer
