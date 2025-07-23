@@ -17,6 +17,7 @@
       "@/task/*": ["task/*"],
       "@/utils/*": ["utils/*"],
       "@/locales/*": ["locales/*"],
+      "@/hooks/*": ["hooks/*"],
       "@/assets/*": ["assets/*"]
     },
 

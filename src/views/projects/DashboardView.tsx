@@ -5,10 +5,11 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { toast } from "react-toastify";
-
+import { useAuth } from "@/hooks/useAuth";
 
 export default function DashboardView() {
 
+    const { data: authData } = useAuth()
     const { data , isLoading } = useQuery({
         queryKey:['projects'],
         queryFn: getProjects
@@ -30,6 +31,9 @@ export default function DashboardView() {
 
 if(data) return (
     <>
+        <h1 className="text-xl font-black">
+            { authData?.name }
+        </h1>
         <h1 className="text-5xl font-black">
             Mis Proyectos
         </h1>
