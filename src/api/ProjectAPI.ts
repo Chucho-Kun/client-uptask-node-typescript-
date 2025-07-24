@@ -24,7 +24,7 @@ export async function getProjects() {
         const response = dashboardProjectSchema.safeParse(data)
         if(response.success) return response.data
         
-        return []; // O retorna un array vacío para evitar undefined
+        //return []; // O retorna un array vacío para evitar undefined
     } catch (error) {
         if( isAxiosError(error) && error.response){
             throw new Error( error.response.data.error )

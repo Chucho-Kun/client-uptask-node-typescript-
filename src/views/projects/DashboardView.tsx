@@ -60,19 +60,19 @@ if(data) return (
                             >{project.projectName}</Link>
 
                             <p className="text-sm text-gray-400">
-                                Cliente: {project.clientName}
+                                Nombre del cliente: {project.clientName}
                             </p>
                             <p className="text-sm text-gray-400">
                                 Descripcion: {project.description}
                             </p>
                             <p className="text-sm text-gray-400">
-                                Tareas: {project.tasks.length}
+                                Total de tareas asignadas: {project.tasks.length}
                             </p>
                         </div>
                     </div>
                     <div className="flex shrink-0 items-center gap-x-6">
                         <Menu as="div" className="relative flex-none">
-                            <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                            <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900 cursor-pointer">
                                 <span className="sr-only">opciones</span>
                                 <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true" />
                             </Menu.Button>
@@ -85,20 +85,20 @@ if(data) return (
                                 >
                                         <Menu.Item>
                                             <Link to={`/projects/${project._id}`}
-                                                className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                                                className='block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer hover:bg-blue-100'>
                                             Ver Proyecto
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item>
                                             <Link to={`/projects/${project._id}/edit`}
-                                                className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                                                className='block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer hover:bg-blue-100'>
                                             Editar Proyecto
                                             </Link>
                                         </Menu.Item>
                                         <Menu.Item>
                                             <button 
                                                 type='button' 
-                                                className='block px-3 py-1 text-sm leading-6 text-red-500'
+                                                className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer hover:bg-blue-100 w-full text-left'
                                                 onClick={() => mutate(project._id) }
                                             >
                                                 Eliminar Proyecto

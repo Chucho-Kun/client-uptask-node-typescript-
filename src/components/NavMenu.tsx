@@ -15,6 +15,7 @@ export default function NavMenu( {name} : NavMenuProps) {
   const logout = () => {
     localStorage.removeItem('AUTH_TOKEN')
     queryClient.invalidateQueries({queryKey: ['user']})
+    return null;
   }
 
   return (
@@ -37,14 +38,14 @@ export default function NavMenu( {name} : NavMenuProps) {
             <p className='text-center'>Hola: { name }</p>
             <Link
               to='/profile'
-              className='block p-2 hover:text-purple-950'
+              className='block p-2 hover:text-purple-950 cursor-pointer hover:bg-blue-100'
             >Mi Perfil</Link>
             <Link
               to='/'
-              className='block p-2 hover:text-purple-950'
+              className='block p-2 hover:text-purple-950 cursor-pointer hover:bg-blue-100'
             >Mis Proyectos</Link>
             <button
-              className='block p-2 hover:text-purple-950'
+              className='block p-2 hover:text-purple-950 cursor-pointer hover:bg-blue-100 w-full text-left'
               type='button'
               onClick={ logout }
             >
