@@ -96,6 +96,34 @@ export async function deleteProject( id : Project['_id'] ) {
 ```
 import { z } from "zod"
 
+/** Auth & Users */
+
+const authSchema = z.object({
+    name: z.string(),
+    email: z.email(),
+    password: z.string(),
+    password_confirmation: z.string(),
+    token: z.string()
+})
+
+type Auth = z.infer<typeof authSchema>
+export type UserLoginForm = Pick<Auth, 'email' | 'password'>
+export type UserRegistrationForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>
+export type RequestConfirmationCodeForm = Pick<Auth, 'email' >
+export type ForgottenPasswordForm = Pick<Auth, 'email' >
+export type NewPasswordForm = Pick<Auth, 'password' | 'password_confirmation' >
+
+export type ConfirmToken = Pick<Auth , 'token'>
+
+/** User Authentication */
+export const userSchema = authSchema.pick({
+    name:true,
+    email:true
+}).extend({
+    _id: z.string()
+})
+export type User = z.infer<typeof userSchema>
+
 /** Tasks */
 export const taskStatusSchema = z.enum(["pending", "onHold" , "inProgress" , "underReview" , "completed"])
 export type TaskStatus = z.infer<typeof taskStatusSchema>
@@ -119,7 +147,8 @@ export const projectSchema = z.object({
     projectName: z.string(),
     clientName: z.string(),
     description: z.string(),
-    tasks: z.array( z.object() )
+    tasks: z.array( z.object() ),
+    team: z.array( z.string() )
 })
 
 export const dashboardProjectSchema = z.array(
@@ -128,12 +157,24 @@ export const dashboardProjectSchema = z.array(
         projectName: true,
         clientName: true,
         description: true,
-        tasks: true
+        tasks: true,
+        team: true
    })
 )
 
 export type Project = z.infer<typeof projectSchema>
-export type ProjectFormData = Pick<Project , 'clientName' | 'projectName' | 'description' | 'tasks' >
+export type ProjectFormData = Pick<Project , 'clientName' | 'projectName' | 'description' > & { tasks?:string[] }
+
+/** Team */
+const teamMemberSchema = userSchema.pick({
+    name: true,
+    email: true,
+    _id:true
+})
+
+export const teamMembersSchema = z.array(teamMemberSchema)
+export type TeamMember = z.infer<typeof teamMemberSchema>
+export type TeamMemberForm = Pick<TeamMember , 'email'>
 ```
 #### src/env.local
 ```
