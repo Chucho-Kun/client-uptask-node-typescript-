@@ -22,6 +22,8 @@ export async function getProjects() {
     try {
         const { data } = await api('/projects')  
         const response = dashboardProjectSchema.safeParse(data)
+        console.log(response);
+        
         if(response.success) return response.data
         //return []; // O retorna un array vacío para evitar undefined
     } catch (error) {

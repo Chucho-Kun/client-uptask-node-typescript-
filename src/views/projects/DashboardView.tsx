@@ -6,10 +6,11 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
+import { isManager } from "@/utils/policies";
 
 export default function DashboardView() {
 
-    const { data: authData } = useAuth()
+    const { data: user , isLoading : authLoading } = useAuth()
     const { data , isLoading } = useQuery({
         queryKey:['projects'],
         queryFn: getProjects
@@ -25,14 +26,14 @@ export default function DashboardView() {
             toast.success(data)
             queryClient.invalidateQueries({queryKey: ['projects']})
         }
-    })
+    })   
 
-    if(isLoading) return "Cargando.."
+    if(isLoading && authLoading) return "Cargando.."
 
-if(data) return (
+if(data && user) return (
     <>
         <h1 className="text-xl font-black">
-            { authData?.name }
+            { user?.name }
         </h1>
         <h1 className="text-5xl font-black">
             Mis Proyectos
@@ -50,11 +51,17 @@ if(data) return (
 
         {data.length ? (
             <ul role="list" className="divide-y divide-gray-100 border border-gray-100 mt-10 bg-white shadow-lg">
-    {data.map((project) => (
+        {data.map((project) => (
                 <li key={project._id} className="flex justify-between gap-x-6 px-5 py-10">
                     <div className="flex min-w-0 gap-x-4">
                         <div className="min-w-0 flex-auto space-y-2">
-                            
+                            <div className="mb-2">
+                                { isManager(project.manager,user._id) ?
+                                    <p className="font-bold text-xs uppercase bg-red-50 text-red-500 border-2 border-red-500 rounded-lg inline-block py-1 px-5 pt-2">Manager</p> :
+                                    <p className="font-bold text-xs uppercase bg-indigo-50 text-indigo-500 border-2 border-indigo-500 rounded-lg inline-block py-1 px-5 pt-2">Colaborador</p>
+                                }
+                            </div>
+
                             <Link to={`/projects/${project._id}`}
                                 className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
                             >{project.projectName}</Link>
@@ -92,21 +99,28 @@ if(data) return (
                                             Ver Proyecto
                                             </Link>
                                         </Menu.Item>
-                                        <Menu.Item>
-                                            <Link to={`/projects/${project._id}/edit`}
-                                                className='block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer hover:bg-blue-100'>
-                                            Editar Proyecto
-                                            </Link>
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                            <button 
-                                                type='button' 
-                                                className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer hover:bg-blue-100 w-full text-left'
-                                                onClick={() => mutate(project._id) }
-                                            >
-                                                Eliminar Proyecto
-                                            </button>
-                                        </Menu.Item>
+
+                                        {isManager(project.manager,user._id) && (
+                                            <>
+                                                <Menu.Item>
+                                                    <Link to={`/projects/${project._id}/edit`}
+                                                        className='block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer hover:bg-blue-100'>
+                                                        Editar Proyecto
+                                                    </Link>
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    <button
+                                                        type='button'
+                                                        className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer hover:bg-blue-100 w-full text-left'
+                                                        onClick={() => mutate(project._id)}
+                                                    >
+                                                        Eliminar Proyecto
+                                                    </button>
+                                                </Menu.Item>
+                                            </>
+                                        )}
+
+                                        
                                 </Menu.Items>
                             </Transition>
                         </Menu>

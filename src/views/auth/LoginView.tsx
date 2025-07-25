@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from "@/components/ErrorMessage";
 import type { UserLoginForm } from "@/types/index";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticateUser } from "@/api/AuthAPI";
 import { toast } from "react-toastify";
 
@@ -16,14 +16,20 @@ export default function LoginView() {
 
   const navigate = useNavigate()
 
+  const queryClient = useQueryClient()
+  queryClient.invalidateQueries({queryKey:['user']})
+
   const { mutate } = useMutation({
     mutationFn: authenticateUser,
     onError: (error) => {
       toast.error(error.message)
     },
     onSuccess: () => {
-      toast.success('Iniciando Sesión')
-      setTimeout(()=> { navigate('/') },3000)
+      toast.success('Iniciando Sesión' , {
+        autoClose:1500,
+        hideProgressBar: true,
+        onClose: () => navigate('/')
+      })
     }
   })
 
