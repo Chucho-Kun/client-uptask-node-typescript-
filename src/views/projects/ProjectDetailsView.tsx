@@ -23,7 +23,8 @@ export default function ProjectDetailsView() {
 
     if(isLoading) return 'Cargando...'
     if(isError)  return <Navigate to='/404' />
-    
+    console.log({data});
+
     if(data) return (
         <>
             <h1 className="text-5xl font-black">{data.projectName}</h1>
@@ -38,7 +39,7 @@ export default function ProjectDetailsView() {
                 <Link 
                     className="bg-purple-600 hover:bg-purple-700 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
                     to={'team'}
-                >Colaboradores</Link>
+                >{ data.team.length === 0 ? `Sin Colaboradores` : `Ver Colaboradores (${data.team.length})`}</Link>
             </nav>
             <TaskList
                 tasks={ data.tasks }

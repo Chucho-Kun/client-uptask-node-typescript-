@@ -23,7 +23,6 @@ export async function getProjects() {
         const { data } = await api('/projects')  
         const response = dashboardProjectSchema.safeParse(data)
         if(response.success) return response.data
-        
         //return []; // O retorna un array vacío para evitar undefined
     } catch (error) {
         if( isAxiosError(error) && error.response){
@@ -36,7 +35,7 @@ export async function getProjects() {
 export async function getProjectsById( id : Project['_id'] ) {
     try {
         const { data } = await api(`/projects/${ id }`)
-            return data            
+        return data
     } catch (error) {
         if( isAxiosError(error) && error.response){
             throw new Error( error.response.data.error )

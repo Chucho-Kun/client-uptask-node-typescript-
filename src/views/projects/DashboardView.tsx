@@ -59,14 +59,17 @@ if(data) return (
                                 className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
                             >{project.projectName}</Link>
 
-                            <p className="text-sm text-gray-400">
-                                Nombre del cliente: {project.clientName}
+                            <p className="text-sm text-gray-400 font-bold">
+                                Cliente: {project.clientName}
                             </p>
                             <p className="text-sm text-gray-400">
                                 Descripcion: {project.description}
                             </p>
                             <p className="text-sm text-gray-400">
                                 Total de tareas asignadas: {project.tasks.length}
+                            </p>
+                            <p className="text-sm text-gray-400">
+                                Colaboradores asignados: {project.team.length}
                             </p>
                         </div>
                     </div>
