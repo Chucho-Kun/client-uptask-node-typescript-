@@ -1,6 +1,8 @@
 import { isAxiosError } from "axios";
-import { userSchema, type ConfirmToken, type ForgottenPasswordForm, type NewPasswordForm, type RequestConfirmationCodeForm, type UserLoginForm, type UserRegistrationForm } from "../types";
+import { userSchema, type CheckPasswordForm, type ConfirmToken, type ForgottenPasswordForm, type NewPasswordForm, type RequestConfirmationCodeForm, type UserLoginForm, type UserRegistrationForm } from "../types";
 import api from "@/lib/axios";
+import { checkPassword } from '../../../upTask-backend/src/utils/auth';
+import { trycatchAxios } from "@/utils/trycatchaxios";
 
 export async function createAccount(formData: UserRegistrationForm) {
     try {
@@ -100,4 +102,12 @@ export async function getUser(){
             throw new Error(error.response.data.error)
         }
     }
+}
+
+export async function checkPassword(formData:CheckPasswordForm) {
+    return trycatchAxios(async() => {
+        const url = `/auth/check-password`
+        const { data } = await api.post<string>(url , formData)
+        return data
+    })
 }
