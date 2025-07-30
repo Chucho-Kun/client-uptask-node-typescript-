@@ -10,6 +10,9 @@ React Web Platform connected to an API hosted on a MongoDB + Express + React + N
 ## Technologies
 React + Typescript + TailwindCSS + Axios + Zod + React Router + React Query
 ## Developer Notes
+## Deploy on Vercel
+Website hosted on vercel.com server
+https://client-uptask-node-typescript.vercel.app/
 ### Managed with Axios
 #### src/lib/axios.ts
 ```
