@@ -5,6 +5,8 @@ React Web Platform connected to an API hosted on a MongoDB + Express + React + N
 ![Gameplay C](src/assets/shotC.png)
 ![Gameplay 1](src/assets/shot1.png)
 ![Gameplay 2](src/assets/shot2.png)
+![Gameplay 3](src/assets/shot3.png)
+
 ## Technologies
 React + Typescript + TailwindCSS + Axios + Zod + React Router + React Query
 ## Developer Notes
