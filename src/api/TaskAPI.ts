@@ -39,7 +39,7 @@ export async function getTaskById({ projectId , taskId } : Pick<TaskAPI , 'proje
 export async function updateTask({ projectId , taskId , formData }:Pick<TaskAPI, 'projectId' | 'taskId' | 'formData'>) {
     try {
         const url = `/projects/${projectId}/tasks/${taskId}`
-        const { data } = await api.put<string>(url , formData)
+        const { data } = await api.put<string>(url , formData)        
         return data
     } catch (error) {
         if(isAxiosError(error) && error.response){
@@ -63,7 +63,7 @@ export async function deleteTask({ projectId , taskId } : Pick<TaskAPI , 'projec
 export async function updateStatus({projectId , taskId , status}: Pick<TaskAPI , 'projectId' | 'taskId' | 'status'>) {
     try {
         const url = `/projects/${projectId}/tasks/${taskId}/status`
-        const { data } = await api.post<string>(url , { status } )
+        const { data } = await api.post<string>(url ,  {status}  )
         return data
     } catch (error) {
         if(isAxiosError(error) && error.response){

@@ -1,18 +1,27 @@
-import { trycatchAxios } from "@/utils/trycatchaxios";
 import type { UpdateCurrentPasswordForm, UserProfileForm } from "../types";
 import api from "@/lib/axios";
+import { isAxiosError } from "axios";
 
 
 export async function updateProfile(formData: UserProfileForm) {
-    return trycatchAxios(async() => {
+
+    try {
         const { data } = await api.put<string>('/auth/profile',formData)
         return data
-    })    
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }   
 }
 
 export async function changePassword(formData:UpdateCurrentPasswordForm) {
-        return trycatchAxios(async() => {
-            const { data } = await api.post<string>('/auth/update-password' , formData)
-            return data
-        })
+    try {
+        const { data } = await api.post<string>('/auth/update-password' , formData)
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }  
 }

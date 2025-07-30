@@ -46,7 +46,7 @@ export default function TaskModalDetails() {
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const status = e.target.value as TaskStatus
-        const data = { projectId , taskId , status }
+        const data = { projectId , taskId , status }        
         mutate(data)
     }
 
