@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Fragment } from "react/jsx-runtime"
+import Loader from "../Loader"
 
 
 export default function ProjectTeamView() {
@@ -32,7 +33,7 @@ export default function ProjectTeamView() {
         }
     })
 
-    if(isLoading) return 'Cargando...'
+    if(isLoading) return <Loader />
     if(isError) return <Navigate to={'/404'} />
     if(data) return (
         <>

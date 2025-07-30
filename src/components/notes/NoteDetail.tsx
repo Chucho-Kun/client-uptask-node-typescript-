@@ -2,6 +2,7 @@ import { deleteNote } from "@/api/NoteAPI"
 import { useAuth } from "@/hooks/useAuth"
 import type { Note } from "@/types/index"
 import { formatDate } from "@/utils/utils"
+import Loader from "@/views/Loader"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useMemo } from "react"
 import { useLocation, useParams } from "react-router-dom"
@@ -32,7 +33,7 @@ export default function NoteDetail({note}:NoteDetailProps) {
         }
     })
 
-    if(isLoading) return 'Cargando...'
+    if(isLoading) return <Loader />
 
   return (
     <div className="p-3 flex justify-between items-center">

@@ -41,6 +41,8 @@ export default function LoginView() {
         <p className="text-2 font-light text-white mt-5">
             Comienza a organizar y supervisar tus proyectos
             <br></br><span className="text-fuchsia-500 font-bold"> Iniciando sesión en este formulario</span>
+            <br></br>email: <span className="text-orange-500 font-bold">root@dev.com</span>
+            <br></br>password: <span className="text-orange-500 font-bold">rootpass</span>
         </p>
       <form
         onSubmit={handleSubmit(handleLogin)}
